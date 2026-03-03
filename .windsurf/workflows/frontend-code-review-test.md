@@ -17,17 +17,17 @@ A professional workflow combining analysis, code implementation, linting, securi
                  ▲              ▲              ▲              ▲              ▲
                  │              │              │              │              │
                  └──────────────┴──────────────┴──────────────┴──────────────┘
-                        (nếu fail → quay lại stage trước để fix)
+                        (if fail → go back to previous stage to fix)
 ```
 
 ## Gate Logic
 
-Mỗi stage là một **gate**:
-- **PASS** → tiến sang stage tiếp theo
-- **FAIL** → quay lại stage trước để fix, sau đó chạy lại từ stage đó
+Each stage is a **gate**:
+- **PASS** → proceed to the next stage
+- **FAIL** → go back to the previous stage to fix, then run from that stage again
 
 ```
-Stage n FAIL → Fix tại Stage n-1 → Chạy lại từ Stage n-1
+Stage n FAIL → Fix at Stage n-1 → Run from Stage n-1
 ```
 
 ---
@@ -48,10 +48,10 @@ Stage n FAIL → Fix tại Stage n-1 → Chạy lại từ Stage n-1
 - [ ] Implementation plan documented
 
 ### Gate Criteria
-- [ ] Requirements rõ ràng, không mơ hồ
-- [ ] Implementation plan đã viết
+- [ ] Requirements are clear and unambiguous
+- [ ] Implementation plan is written
 
-### If FAIL → Exit pipeline (không thể code nếu không hiểu requirement)
+### If FAIL → Exit pipeline (cannot code without understanding requirements)
 
 ---
 
@@ -71,7 +71,7 @@ Stage n FAIL → Fix tại Stage n-1 → Chạy lại từ Stage n-1
 - [ ] Error handling in place
 
 ### Gate Criteria
-- [ ] Code compile được (no TypeScript errors)
+- [ ] Code compiles (no TypeScript errors)
 - [ ] Components render without errors
 
 ### If FAIL → Fix code → Rerun Stage 2
@@ -99,7 +99,7 @@ npm run lint
 - [ ] No `any` types used
 
 ### Gate Criteria
-- [ ] `npm run lint` pass, không có error
+- [ ] `npm run lint` passes with no errors
 
 ### If FAIL → Fix code (Stage 2) → Rerun Stage 3
 
@@ -190,7 +190,7 @@ npm test -- --coverage --watchAll=false
 - [ ] Error cases tested
 
 ### Gate Criteria
-- [ ] Tất cả tests pass
+- [ ] All tests pass
 
 ### If FAIL → Fix code (Stage 2) → Rerun Stage 3 → Rerun Stage 4 → Rerun Stage 5 → Rerun Stage 6
 
@@ -249,7 +249,7 @@ START
 # Run full pipeline for a new feature
 Use the frontend-code-review-test pipeline to implement [feature description]
 
-# Run specific stage (với retry logic tự động nếu fail)
+# Run specific stage (with automatic retry logic if fail)
 Analyze and plan [feature] using frontend-analysis-plan skill
 Implement [feature] using frontend-code skill
 Lint the code using frontend-lint skill
@@ -257,11 +257,11 @@ Scan for security issues using frontend-security-scan skill
 Review [file] using frontend-review skill
 Run tests using frontend-test skill
 
-# Khi gặp fail:
-# - Nếu Lint fail → Fix code rồi chạy lại Lint
-# - Nếu Scan fail → Fix code rồi chạy lại Lint → Scan
-# - Nếu Review fail → Fix code rồi chạy lại Lint → Scan → Review
-# - Nếu Test fail → Fix code rồi chạy lại Lint → Scan → Review → Test
+# When encountering fail:
+# - If Lint fail → Fix code then rerun Lint
+# - If Scan fail → Fix code then rerun Lint → Scan
+# - If Review fail → Fix code then rerun Lint → Scan → Review
+# - If Test fail → Fix code then rerun Lint → Scan → Review → Test
 ```
 
 ## Quick Reference
