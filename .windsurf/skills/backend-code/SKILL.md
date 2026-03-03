@@ -96,6 +96,18 @@ def create_contact():
     logger.info("Contact created successfully")
 ```
 
+## File Locations
+
+### Where to Add New Code
+
+| Type | File | Example |
+|------|------|---------|
+| New API endpoint | `app.py` | `@app.route('/api/new', methods=['POST'])` |
+| Utility function | `app.py` | `def helper(): ...` |
+| Validation function | `app.py` | `def validate_data(data): ...` |
+| Error handler | `app.py` | `@app.errorhandler(Exception)` |
+| Tests | `test_app.py` | `def test_new_feature(): ...` |
+
 ## Implementation Checklist
 
 - [ ] Parse request data properly
@@ -118,9 +130,3 @@ See `.windsurf/rules/secure-development.md` for security guidelines:
 ```
 Implement [feature description] using the backend-code skill
 ```
-
-## File Locations
-
-- Main app: `contact-form-app/backend/app.py`
-- Tests: `contact-form-app/backend/test_app.py`
-- Requirements: `contact-form-app/backend/requirements.txt`

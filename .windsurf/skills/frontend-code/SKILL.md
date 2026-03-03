@@ -133,6 +133,32 @@ const submitForm = async (data: FormData) => {
 };
 ```
 
+## File Locations
+
+### Where to Add New Code
+
+| Type | Location | Notes |
+|------|----------|-------|
+| New component | `src/components/MyComponent.tsx` | PascalCase |
+| New page | `src/pages/MyPage.tsx` | PascalCase |
+| New utility | `src/utils/myUtils.ts` | camelCase |
+| New CSS | Same folder as component | Match component name |
+| Update App | `src/App.tsx` | Import and add component |
+
+### How to Add Component to App
+```typescript
+// src/App.tsx
+import MyComponent from './components/MyComponent';
+
+function App() {
+  return (
+    <div className="App">
+      <MyComponent title="Hello" onAction={() => {}} />
+    </div>
+  );
+}
+```
+
 ## Implementation Checklist
 
 - [ ] TypeScript interfaces/types defined
@@ -155,10 +181,3 @@ See `.windsurf/rules/code-style-guide.md` for code style guidelines:
 ```
 Implement [feature] using the frontend-code skill
 ```
-
-## File Locations
-
-- Components: `contact-form-app/frontend/src/components/`
-- Pages: `contact-form-app/frontend/src/pages/`
-- Utils: `contact-form-app/frontend/src/utils/`
-- Main App: `contact-form-app/frontend/src/App.tsx`
