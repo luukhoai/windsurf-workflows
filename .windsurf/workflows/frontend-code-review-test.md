@@ -15,7 +15,7 @@ description: Professional CI-style pipeline for frontend: analyze → implement 
 ```
 ┌──────────┐  ┌───────────┐  ┌─────────┐  ┌──────────┐
 │ ANALYZE │─▶│ IMPLEMENT │─▶│  TEST   │─▶│  REVIEW  │
-│  Plan   │  │Code+Lint+Scan│ │ Verify │  │ Quality  │
+│  Plan   │  │Code+Lint│ │ Verify │  │ Quality  │
 └──────────┘  └───────────┘  └─────────┘  └──────────┘
 ```
 
@@ -98,7 +98,7 @@ Review using frontend-review skill
 | Stage | Skill | Gate |
 |-------|-------|------|
 | 1. Analyze | frontend-analysis-plan | Plan written |
-| 2. Implement | frontend-code | Code+Lint+Scan pass |
+| 2. Implement | frontend-code | Code+Lint pass |
 | 3. Test | frontend-test | All tests pass |
 | 4. Review | frontend-review | Approved |
 

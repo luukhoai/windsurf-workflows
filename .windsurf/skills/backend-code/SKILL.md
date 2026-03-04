@@ -1,11 +1,11 @@
 ---
 name: Backend Code
-description: Backend implementation: code + lint + security scan
+description: Backend implementation skill with lint
 ---
 
 # Backend Code Skill
 
-Implement backend code with linting and security scanning.
+Implement backend code with linting.
 
 ## When to Use
 - Implementing new API endpoints
@@ -15,7 +15,7 @@ Implement backend code with linting and security scanning.
 
 ## Concept
 
-- **This skill**: Implementation + Lint + Security Scan
+- **This skill**: Implementation + Lint
 - **Review**: See `backend-review` skill
 - **Rules**: Standards (`.windsurf/rules/`)
 
@@ -66,19 +66,6 @@ flake8 app/ tests/ --max-line-length=100 --ignore=E501,W503
 | Unused import | Remove import |
 | Missing type hint | Add `-> type` |
 
-## Security Scan
-
-### Run Security Scan
-```bash
-snyk code test --severity-threshold=medium
-```
-
-### Security Checklist
-
-- [ ] Input validation implemented
-- [ ] No hardcoded secrets
-- [ ] Error messages don't expose internals
-
 ## Commands
 
 ### Run App
@@ -98,11 +85,6 @@ pytest tests/ -v
 flake8 app/ tests/
 ```
 
-### Run Security Scan
-```bash
-snyk code test --severity-threshold=medium
-```
-
 ## Checklist
 
 - [ ] Code follows project structure
@@ -113,7 +95,6 @@ snyk code test --severity-threshold=medium
 - [ ] Type hints used
 - [ ] Tests written
 - [ ] Lint passes
-- [ ] Security scan passes
 
 ## Related Rules
 

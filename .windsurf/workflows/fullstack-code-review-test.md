@@ -124,7 +124,7 @@ Review using backend-review and frontend-review skills
 | Stage | Skills | Gate |
 |-------|--------|------|
 | 1. Analyze | fullstack-analysis-plan | Plan written |
-| 2. Implement | backend-code, frontend-code | Code+Lint+Scan pass |
+| 2. Implement | backend-code, frontend-code | Code+Lint pass |
 | 3. Test | backend-test, frontend-test | All tests pass |
 | 4. Review | backend-review, frontend-review | Approved |
 

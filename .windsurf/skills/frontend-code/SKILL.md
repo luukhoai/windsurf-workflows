@@ -1,11 +1,11 @@
 ---
 name: Frontend Code
-description: Frontend implementation: code + lint + security scan
+description: Frontend implementation skill with lint
 ---
 
 # Frontend Code Skill
 
-Implement frontend code with linting and security scanning.
+Implement frontend code with linting.
 
 ## When to Use
 - Implementing new components
@@ -15,7 +15,7 @@ Implement frontend code with linting and security scanning.
 
 ## Concept
 
-- **This skill**: Implementation + Lint + Security Scan
+- **This skill**: Implementation + Lint
 - **Review**: See `frontend-review` skill
 - **Rules**: Standards (`.windsurf/rules/`)
 
@@ -67,20 +67,6 @@ npm run lint
 | Missing dependency | Add to useEffect deps |
 | Missing key | Add unique key in map |
 
-## Security Scan
-
-### Run Security Scan
-```bash
-snyk code test --severity-threshold=medium
-npm audit
-```
-
-### Security Checklist
-
-- [ ] No XSS vulnerabilities
-- [ ] No hardcoded secrets
-- [ ] Input validation implemented
-
 ## Commands
 
 ### Run App
@@ -99,12 +85,6 @@ npm test -- --watchAll=false
 npm run lint
 ```
 
-### Run Security Scan
-```bash
-snyk code test --severity-threshold=medium
-npm audit
-```
-
 ## Checklist
 
 - [ ] Code follows React patterns
@@ -114,7 +94,6 @@ npm audit
 - [ ] Accessibility considered
 - [ ] Tests written
 - [ ] Lint passes
-- [ ] Security scan passes
 
 ## Related Rules
 

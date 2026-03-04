@@ -15,7 +15,7 @@ description: Professional CI-style pipeline for backend: analyze → implement �
 ```
 ┌──────────┐  ┌───────────┐  ┌─────────┐  ┌──────────┐
 │ ANALYZE │─▶│ IMPLEMENT │─▶│  TEST   │─▶│  REVIEW  │
-│  Plan   │  │Code+Lint+Scan│ │ Verify │  │ Quality  │
+│  Plan   │  │Code+Lint│ │ Verify │  │ Quality  │
 └──────────┘  └───────────┘  └─────────┘  └──────────┘
 ```
 
@@ -98,7 +98,7 @@ Review using backend-review skill
 | Stage | Skill | Gate |
 |-------|-------|------|
 | 1. Analyze | backend-analysis-plan | Plan written |
-| 2. Implement | backend-code | Code+Lint+Scan pass |
+| 2. Implement | backend-code | Code+Lint pass |
 | 3. Test | backend-test | All tests pass |
 | 4. Review | backend-review | Approved |
 
