@@ -1,6 +1,6 @@
 ---
 name: Fullstack Code-Review-Test Pipeline
-description: Professional CI-style pipeline for fullstack: analyze → implement → review → test
+description: Professional CI-style pipeline for fullstack: analyze → implement → test → review
 ---
 
 # Fullstack Code-Review-Test Pipeline
@@ -28,12 +28,12 @@ description: Professional CI-style pipeline for fullstack: analyze → implement
              │
              ▼
         ┌────────┐
-        │ REVIEW │  ← Both layers
+        │  TEST  │  ← Both layers
         └────┬────┘
              │
              ▼
         ┌────────┐
-        │  TEST  │  ← Both layers
+        │ REVIEW │  ← Both layers
         └────────┘
 ```
 
@@ -79,15 +79,7 @@ npm audit
 
 ---
 
-## Stage 3: Review
-
-**Skills:** `backend-review` + `frontend-review`
-
-### Gate: Both layers reviewed
-
----
-
-## Stage 4: Test
+## Stage 3: Test
 
 **Skills:** `backend-test` + `frontend-test`
 
@@ -104,6 +96,14 @@ npm test -- --watchAll=false
 
 ---
 
+## Stage 4: Review
+
+**Skills:** `backend-review` + `frontend-review`
+
+### Gate: Both layers reviewed
+
+---
+
 ## Usage & Reference
 
 ### Invoke Pipeline
@@ -115,8 +115,8 @@ Use the fullstack-code-review-test pipeline to implement [feature]
 Analyze using fullstack-analysis-plan skill
 Implement backend using backend-code skill
 Implement frontend using frontend-code skill
-Review using backend-review and frontend-review skills
 Test using backend-test and frontend-test skills
+Review using backend-review and frontend-review skills
 ```
 
 ### Stage Reference
@@ -125,14 +125,14 @@ Test using backend-test and frontend-test skills
 |-------|--------|------|
 | 1. Analyze | fullstack-analysis-plan | Plan written |
 | 2. Implement | backend-code, frontend-code | Code+Lint+Scan pass |
-| 3. Review | backend-review, frontend-review | Approved |
-| 4. Test | backend-test, frontend-test | All pass |
+| 3. Test | backend-test, frontend-test | All tests pass |
+| 4. Review | backend-review, frontend-review | Approved |
 
 ## Verification
 
 - [ ] API contract defined
 - [ ] Backend implemented
 - [ ] Frontend implemented
+- [ ] Tests pass
 - [ ] Both reviewed
-- [ ] All tests pass
 - [ ] ✅ Ready

@@ -1,6 +1,6 @@
 ---
 name: Backend Code-Review-Test Pipeline
-description: Professional CI-style pipeline for backend: analyze → implement → review → test
+description: Professional CI-style pipeline for backend: analyze → implement → test → review
 ---
 
 # Backend Code-Review-Test Pipeline
@@ -13,10 +13,10 @@ description: Professional CI-style pipeline for backend: analyze → implement �
 ## Pipeline
 
 ```
-┌──────────┐  ┌───────────┐  ┌──────────┐  ┌─────────┐
-│ ANALYZE │─▶│ IMPLEMENT │─▶│  REVIEW  │─▶│   TEST  │
-│  Plan   │  │Code+Lint+Scan│ │ Quality  │  │ Verify │
-└──────────┘  └───────────┘  └──────────┘  └─────────┘
+┌──────────┐  ┌───────────┐  ┌─────────┐  ┌──────────┐
+│ ANALYZE │─▶│ IMPLEMENT │─▶│  TEST   │─▶│  REVIEW  │
+│  Plan   │  │Code+Lint+Scan│ │ Verify │  │ Quality  │
+└──────────┘  └───────────┘  └─────────┘  └──────────┘
 ```
 
 ## Prerequisites
@@ -58,15 +58,7 @@ snyk code test --severity-threshold=medium
 
 ---
 
-## Stage 3: Review
-
-**Skill:** `backend-review`
-
-### Gate: Code reviewed
-
----
-
-## Stage 4: Test
+## Stage 3: Test
 
 **Skill:** `backend-test`
 
@@ -76,6 +68,14 @@ pytest tests/ -v
 ```
 
 ### Gate: All tests pass
+
+---
+
+## Stage 4: Review
+
+**Skill:** `backend-review`
+
+### Gate: Code reviewed
 
 ---
 
@@ -89,8 +89,8 @@ Use the backend-code-review-test pipeline to implement [feature]
 # By stage
 Analyze using backend-analysis-plan skill
 Implement using backend-code skill
-Review using backend-review skill
 Test using backend-test skill
+Review using backend-review skill
 ```
 
 ### Stage Reference
@@ -99,13 +99,13 @@ Test using backend-test skill
 |-------|-------|------|
 | 1. Analyze | backend-analysis-plan | Plan written |
 | 2. Implement | backend-code | Code+Lint+Scan pass |
-| 3. Review | backend-review | Approved |
-| 4. Test | backend-test | All pass |
+| 3. Test | backend-test | All tests pass |
+| 4. Review | backend-review | Approved |
 
 ## Verification
 
 - [ ] Plan documented
 - [ ] Implement complete
-- [ ] Code reviewed
 - [ ] Tests pass
+- [ ] Code reviewed
 - [ ] ✅ Ready

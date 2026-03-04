@@ -1,6 +1,6 @@
 ---
 name: Frontend Code-Review-Test Pipeline
-description: Professional CI-style pipeline for frontend: analyze → implement → review → test
+description: Professional CI-style pipeline for frontend: analyze → implement → test → review
 ---
 
 # Frontend Code-Review-Test Pipeline
@@ -13,10 +13,10 @@ description: Professional CI-style pipeline for frontend: analyze → implement 
 ## Pipeline
 
 ```
-┌──────────┐  ┌───────────┐  ┌──────────┐  ┌─────────┐
-│ ANALYZE │─▶│ IMPLEMENT │─▶│  REVIEW  │─▶│   TEST  │
-│  Plan   │  │Code+Lint+Scan│ │ Quality  │  │ Verify │
-└──────────┘  └───────────┘  └──────────┘  └─────────┘
+┌──────────┐  ┌───────────┐  ┌─────────┐  ┌──────────┐
+│ ANALYZE │─▶│ IMPLEMENT │─▶│  TEST   │─▶│  REVIEW  │
+│  Plan   │  │Code+Lint+Scan│ │ Verify │  │ Quality  │
+└──────────┘  └───────────┘  └─────────┘  └──────────┘
 ```
 
 ## Prerequisites
@@ -58,15 +58,7 @@ npm audit
 
 ---
 
-## Stage 3: Review
-
-**Skill:** `frontend-review`
-
-### Gate: Code reviewed
-
----
-
-## Stage 4: Test
+## Stage 3: Test
 
 **Skill:** `frontend-test`
 
@@ -76,6 +68,14 @@ npm test -- --watchAll=false
 ```
 
 ### Gate: All tests pass
+
+---
+
+## Stage 4: Review
+
+**Skill:** `frontend-review`
+
+### Gate: Code reviewed
 
 ---
 
@@ -89,8 +89,8 @@ Use the frontend-code-review-test pipeline to implement [feature]
 # By stage
 Analyze using frontend-analysis-plan skill
 Implement using frontend-code skill
-Review using frontend-review skill
 Test using frontend-test skill
+Review using frontend-review skill
 ```
 
 ### Stage Reference
@@ -99,13 +99,13 @@ Test using frontend-test skill
 |-------|-------|------|
 | 1. Analyze | frontend-analysis-plan | Plan written |
 | 2. Implement | frontend-code | Code+Lint+Scan pass |
-| 3. Review | frontend-review | Approved |
-| 4. Test | frontend-test | All pass |
+| 3. Test | frontend-test | All tests pass |
+| 4. Review | frontend-review | Approved |
 
 ## Verification
 
 - [ ] Plan documented
 - [ ] Implement complete
-- [ ] Code reviewed
 - [ ] Tests pass
+- [ ] Code reviewed
 - [ ] ✅ Ready
