@@ -34,6 +34,49 @@ def validate_file_size(file):
     return file.content_length <= MAX_FILE_SIZE
 
 
+def validate_email_format(email):
+    """Validate email format using basic regex"""
+    import re
+    pattern = r'^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$'
+    return re.match(pattern, email) is not None
+
+
+def check_email_exists(email):
+    """Check if email already exists in contacts (case-insensitive)"""
+    email_lower = email.lower().strip()
+    for contact in app.contacts:
+        if contact['email'].lower().strip() == email_lower:
+            return True
+    return False
+
+
+@app.route('/api/contacts/check-email', methods=['GET'])
+def check_email():
+    """Check if email already exists in the system"""
+    try:
+        email = request.args.get('email', '').strip()
+
+        if not email:
+            return jsonify({'success': False, 'error': 'Email parameter is required'}), 400
+
+        if not validate_email_format(email):
+            return jsonify({'success': False, 'error': 'Invalid email format'}), 400
+
+        exists = check_email_exists(email)
+
+        return jsonify({
+            'success': True,
+            'data': {
+                'exists': exists,
+                'email': email
+            }
+        })
+
+    except Exception as e:
+        app.logger.error(f"Error checking email: {str(e)}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+
 @app.route('/api/contacts', methods=['POST'])
 def submit_contact():
     try:
@@ -65,8 +108,12 @@ def handle_contact_with_file():
         return jsonify({'success': False, 'error': 'Message is required'}), 400
 
     # Validate email format
-    if '@' not in email or '.' not in email:
+    if not validate_email_format(email):
         return jsonify({'success': False, 'error': 'Invalid email format'}), 400
+
+    # Check for duplicate email
+    if check_email_exists(email):
+        return jsonify({'success': False, 'error': 'A contact with this email already exists'}), 409
 
     # Handle file upload
     attachment_info = None
@@ -128,8 +175,12 @@ def handle_contact_without_file():
         return jsonify({'success': False, 'error': 'Message is required'}), 400
 
     # Validate email format
-    if '@' not in email or '.' not in email:
+    if not validate_email_format(email):
         return jsonify({'success': False, 'error': 'Invalid email format'}), 400
+
+    # Check for duplicate email
+    if check_email_exists(email):
+        return jsonify({'success': False, 'error': 'A contact with this email already exists'}), 409
 
     # Create contact record
     contact = {

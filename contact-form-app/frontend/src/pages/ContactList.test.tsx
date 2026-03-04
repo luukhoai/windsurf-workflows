@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import ContactList from './ContactList';
+import { Spinner } from 'react-bootstrap';
 
 // Mock fetch API
 const mockContacts = [
@@ -40,7 +41,7 @@ describe('ContactList', () => {
     render(<ContactList />);
     
     expect(screen.getByText('Loading contacts...')).toBeInTheDocument();
-    expect(document.querySelector('.loading-spinner')).toBeInTheDocument(); // Check for spinner class
+    expect(screen.getByText('Loading...')).toBeInTheDocument(); // Bootstrap spinner visually hidden text
   });
 
   it('renders contact management header', async () => {

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { ContactFormData, FormErrors } from "../types/form";
 import {
   validateName,
   validateEmail,
+  validateEmailWithDuplicate,
   validateMessage,
   validateAttachment,
   sanitizeInputString,
@@ -36,6 +37,60 @@ const ContactForm: React.FC = () => {
     "idle" | "success" | "error"
   >("idle");
   const [submitMessage, setSubmitMessage] = useState<string>("");
+  const [isCheckingEmail, setIsCheckingEmail] = useState<boolean>(false);
+
+  // Debounced email validation
+  const debouncedEmailCheck = useCallback(
+    async (email: string) => {
+      if (!email || !validateEmail(email).isValid) {
+        return;
+      }
+
+      setIsCheckingEmail(true);
+      try {
+        const result = await validateEmailWithDuplicate(email);
+        if (!result.isValid) {
+          setErrors(prev => ({ ...prev, email: result.error }));
+        } else {
+          setErrors(prev => {
+            const newErrors = { ...prev };
+            delete newErrors.email;
+            return newErrors;
+          });
+        }
+      } catch (error) {
+        console.warn('Email validation failed:', error);
+      } finally {
+        setIsCheckingEmail(false);
+      }
+    },
+    []
+  );
+
+  // Email change handler with debounced validation
+  const handleEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setFormData(prev => ({ ...prev, email: value }));
+      
+      // Clear existing email error
+      if (errors.email) {
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors.email;
+          return newErrors;
+        });
+      }
+
+      // Debounce the duplicate check
+      const timeoutId = setTimeout(() => {
+        debouncedEmailCheck(value);
+      }, 500);
+
+      return () => clearTimeout(timeoutId);
+    },
+    [errors.email, debouncedEmailCheck]
+  );
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -183,7 +238,7 @@ const ContactForm: React.FC = () => {
           id="email"
           name="email"
           value={formData.email}
-          onChange={handleChange}
+          onChange={handleEmailChange}
           isInvalid={!!errors.email}
           aria-required="true"
           aria-describedby={errors.email ? "email-error" : undefined}
@@ -194,6 +249,11 @@ const ContactForm: React.FC = () => {
           <div className="invalid-feedback d-block" id="email-error">
             {errors.email}
           </div>
+        )}
+        {isCheckingEmail && (
+          <FormText className="text-muted">
+            Checking email...
+          </FormText>
         )}
       </FormGroup>
 

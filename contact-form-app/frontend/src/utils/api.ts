@@ -83,6 +83,30 @@ export const fetchContacts = async (): Promise<ApiResponse> => {
 };
 
 /**
+ * Checks if an email already exists in the system.
+ */
+export const checkEmailExists = async (email: string): Promise<{ success: boolean; exists?: boolean; error?: string }> => {
+  try {
+    const params = new URLSearchParams({ email });
+    const response = await fetch(`${API_BASE_URL}/api/contacts/check-email?${params}`);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    return { success: true, exists: result.data.exists };
+  } catch (error) {
+    console.error("Error checking email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to check email",
+    };
+  }
+};
+
+/**
  * Searches contacts using the backend search API.
  */
 export const searchContacts = async (
