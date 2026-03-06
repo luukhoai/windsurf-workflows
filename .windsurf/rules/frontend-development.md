@@ -1,7 +1,7 @@
 ---
 trigger: always_on
 description: when working on frontend React TypeScript code
-globs: ["**/*.tsx", "**/*.ts", "**/*.css"]
+globs: contact-form-app/frontend/*
 ---
 
 ## React Development Standards

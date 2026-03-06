@@ -1,7 +1,7 @@
 ---
 trigger: always_on
 description: when working on backend code files
-globs: ["**/*.py", "requirements.txt", "app.py", "run.py"]
+globs: contact-form-app/backend/*
 ---
 
 ## Python Environment
