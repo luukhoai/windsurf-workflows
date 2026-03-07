@@ -86,3 +86,37 @@ Key endpoints:
 - **Indentation**: Use 2 spaces for indentation in frontend code
 - **Security**: Use parameterized queries when interfacing with databases; validate and sanitize all user inputs
 - **Serverless consideration**: When receiving requests that are antipatterns for serverless architecture, clarify with user before proceeding
+
+## Backend Development Standards
+
+### OOP and SOLID Principles
+- Follow comprehensive OOP design patterns (see `.windsurf/rules/backend-development.md`)
+- Apply SOLID principles for maintainable architecture
+- Use dependency injection and repository patterns
+- Implement proper service layer architecture
+
+### Code Quality Pipeline
+- Use the `backend-code-test-review` workflow for all backend changes
+- Ensure OOP/SOLID compliance through all development stages
+- Maintain >80% test coverage with unit and integration tests
+- Pass all quality gates: lint, security, architecture, and tests
+
+### Development Tools
+- **Linting**: `flake8 app/ tests/`
+- **Security**: `snyk code test --severity-threshold=medium`
+- **Testing**: `pytest tests/ -v`
+- **Formatting**: `black app/ tests/`
+
+## Frontend Development Standards
+
+### React and TypeScript
+- Use functional components with hooks only
+- Implement proper TypeScript typing (no `any`)
+- Follow component-specific guidelines (see `contact-form-app/frontend/src/components/AGENTS.md`)
+- Use 2-space indentation for all frontend code
+
+### Code Quality
+- Ensure accessibility compliance
+- Implement proper form validation
+- Use responsive design principles
+- Follow modern React patterns
