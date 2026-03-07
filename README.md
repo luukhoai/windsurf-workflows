@@ -35,8 +35,6 @@ This sample project serves as a comprehensive guide for developers to understand
 ├── contact-form-app/            # Sample application demonstrating framework usage
 │   ├── backend/                 # Python Flask backend with enterprise patterns
 │   └── frontend/                # React TypeScript frontend with production standards
-└── walkthrough/                  # Learning materials and examples
-    └── for-administrators/        # Framework administration guidance
 ```
 
 ## Framework Components
